@@ -704,6 +704,8 @@ void EditorNode::_notification(int p_what) {
 
 			get_viewport()->connect("size_changed", callable_mp(this, &EditorNode::_viewport_resized));
 
+			get_viewport()->connect("size_changed", callable_mp(this, &EditorNode::_viewport_resized));
+
 			/* DO NOT LOAD SCENES HERE, WAIT FOR FILE SCANNING AND REIMPORT TO COMPLETE */
 		} break;
 
