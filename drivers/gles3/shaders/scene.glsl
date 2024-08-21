@@ -1818,9 +1818,6 @@ void main() {
 		ambient_light += lm_light_l1_0 * n.z * lightmap_exposure_normalization;
 		ambient_light += lm_light_l1p1 * n.x * lightmap_exposure_normalization;
 #else
-#ifdef LIGHTMAP_BICUBIC_FILTER
-		ambient_light += textureArray_bicubic(lightmap_textures, uvw, lightmap_texture_size).rgb * lightmap_exposure_normalization;
-#else
 		ambient_light += textureLod(lightmap_textures, uvw, 0.0).rgb * lightmap_exposure_normalization;
 #endif
 #endif
