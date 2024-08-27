@@ -248,6 +248,76 @@ Variant GodotSegmentShape2D::get_data() const {
 /*********************************************************/
 /*********************************************************/
 
+void GodotLineShape2D::get_supports(const Vector2 &p_normal, Vector2 *r_supports, int &r_amount) const {
+	if (Math::abs(p_normal.dot(n)) > segment_is_valid_support_threshold) {
+		r_supports[0] = a;
+		r_supports[1] = b;
+		r_amount = 2;
+		return;
+	}
+
+	real_t dp = p_normal.dot(b - a);
+	if (dp > 0) {
+		*r_supports = b;
+	} else {
+		*r_supports = a;
+	}
+	r_amount = 1;
+}
+
+bool GodotLineShape2D::contains_point(const Vector2 &p_point) const {
+	return false;
+}
+
+bool GodotLineShape2D::intersect_segment(const Vector2 &p_begin, const Vector2 &p_end, Vector2 &r_point, Vector2 &r_normal) const {
+	if (!Geometry2D::segment_intersects_segment(p_begin, p_end, a, b, &r_point)) {
+		return false;
+	}
+
+	if (n.dot(p_begin) > n.dot(a)) {
+		r_normal = n;
+	} else {
+		r_normal = -n;
+	}
+
+	return true;
+}
+
+real_t GodotLineShape2D::get_moment_of_inertia(real_t p_mass, const Size2 &p_scale) const {
+	return p_mass * ((a * p_scale).distance_squared_to(b * p_scale)) / 12;
+}
+
+void GodotLineShape2D::set_data(const Variant &p_data) {
+	ERR_FAIL_COND(p_data.get_type() != Variant::RECT2);
+
+	Rect2 r = p_data;
+	a = r.position;
+	b = r.size;
+	n = (b - a).orthogonal();
+
+	Rect2 aabb_new;
+	aabb_new.position = a;
+	aabb_new.expand_to(b);
+	if (aabb_new.size.x == 0) {
+		aabb_new.size.x = 0.001;
+	}
+	if (aabb_new.size.y == 0) {
+		aabb_new.size.y = 0.001;
+	}
+	configure(aabb_new);
+}
+
+Variant GodotLineShape2D::get_data() const {
+	Rect2 r;
+	r.position = a;
+	r.size = b;
+	return r;
+}
+
+/*********************************************************/
+/*********************************************************/
+/*********************************************************/
+
 void GodotCircleShape2D::get_supports(const Vector2 &p_normal, Vector2 *r_supports, int &r_amount) const {
 	r_amount = 1;
 	*r_supports = p_normal * radius;

@@ -78,6 +78,7 @@ public:
 	FUNCRID(world_boundary_shape)
 	FUNCRID(separation_ray_shape)
 	FUNCRID(segment_shape)
+	FUNCRID(line_shape)
 	FUNCRID(circle_shape)
 	FUNCRID(rectangle_shape)
 	FUNCRID(capsule_shape)

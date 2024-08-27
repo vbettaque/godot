@@ -854,6 +854,12 @@
 				Sets the value of the given joint parameter. See [enum JointParam] for the list of available parameters.
 			</description>
 		</method>
+		<method name="line_shape_create">
+			<return type="RID" />
+			<description>
+				Creates a 2D line shape in the physics server, and returns the [RID] that identifies it. Use [method shape_set_data] to set the line's points.
+			</description>
+		</method>
 		<method name="pin_joint_get_flag" qualifiers="const">
 			<return type="bool" />
 			<param index="0" name="joint" type="RID" />

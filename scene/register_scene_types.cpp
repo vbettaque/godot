@@ -209,6 +209,7 @@
 #include "scene/resources/2d/circle_shape_2d.h"
 #include "scene/resources/2d/concave_polygon_shape_2d.h"
 #include "scene/resources/2d/convex_polygon_shape_2d.h"
+#include "scene/resources/2d/line_shape_2d.h"
 #include "scene/resources/2d/navigation_mesh_source_geometry_data_2d.h"
 #include "scene/resources/2d/navigation_polygon.h"
 #include "scene/resources/2d/polygon_path_finder.h"
@@ -995,6 +996,7 @@ void register_scene_types() {
 	GDREGISTER_ABSTRACT_CLASS(Shape2D);
 	GDREGISTER_CLASS(WorldBoundaryShape2D);
 	GDREGISTER_CLASS(SegmentShape2D);
+	GDREGISTER_CLASS(LineShape2D);
 	GDREGISTER_CLASS(SeparationRayShape2D);
 	GDREGISTER_CLASS(CircleShape2D);
 	GDREGISTER_CLASS(RectangleShape2D);
@@ -1095,7 +1097,7 @@ void register_scene_types() {
 	ClassDB::add_compatibility_class("KinematicCollision", "KinematicCollision3D");
 	ClassDB::add_compatibility_class("Light", "Light3D");
 	ClassDB::add_compatibility_class("Light2D", "PointLight2D");
-	ClassDB::add_compatibility_class("LineShape2D", "WorldBoundaryShape2D");
+	// ClassDB::add_compatibility_class("LineShape2D", "WorldBoundaryShape2D"); // TODO: Rename
 	ClassDB::add_compatibility_class("Listener", "AudioListener3D");
 	ClassDB::add_compatibility_class("MeshInstance", "MeshInstance3D");
 	ClassDB::add_compatibility_class("MultiMeshInstance", "MultiMeshInstance3D");

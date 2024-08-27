@@ -262,6 +262,50 @@ public:
 	}
 };
 
+class GodotLineShape2D : public GodotShape2D {
+	Vector2 a;
+	Vector2 b;
+	Vector2 n;
+
+public:
+	_FORCE_INLINE_ const Vector2 &get_a() const { return a; }
+	_FORCE_INLINE_ const Vector2 &get_b() const { return b; }
+	_FORCE_INLINE_ const Vector2 &get_normal() const { return n; }
+
+	virtual PhysicsServer2D::ShapeType get_type() const override { return PhysicsServer2D::SHAPE_LINE; }
+
+	_FORCE_INLINE_ Vector2 get_xformed_normal(const Transform2D &p_xform) const {
+		return (p_xform.xform(b) - p_xform.xform(a)).normalized().orthogonal();
+	}
+	virtual void project_rangev(const Vector2 &p_normal, const Transform2D &p_transform, real_t &r_min, real_t &r_max) const override { project_range(p_normal, p_transform, r_min, r_max); }
+	virtual void get_supports(const Vector2 &p_normal, Vector2 *r_supports, int &r_amount) const override;
+
+	virtual bool contains_point(const Vector2 &p_point) const override;
+	virtual bool intersect_segment(const Vector2 &p_begin, const Vector2 &p_end, Vector2 &r_point, Vector2 &r_normal) const override;
+	virtual real_t get_moment_of_inertia(real_t p_mass, const Size2 &p_scale) const override;
+
+	virtual void set_data(const Variant &p_data) override;
+	virtual Variant get_data() const override;
+
+	_FORCE_INLINE_ void project_range(const Vector2 &p_normal, const Transform2D &p_transform, real_t &r_min, real_t &r_max) const {
+		//real large
+		r_max = p_normal.dot(p_transform.xform(a));
+		r_min = p_normal.dot(p_transform.xform(b));
+		if (r_max < r_min) {
+			SWAP(r_max, r_min);
+		}
+	}
+
+	DEFAULT_PROJECT_RANGE_CAST
+
+	_FORCE_INLINE_ GodotLineShape2D() {}
+	_FORCE_INLINE_ GodotLineShape2D(const Vector2 &p_a, const Vector2 &p_b, const Vector2 &p_n) {
+		a = p_a;
+		b = p_b;
+		n = p_n;
+	}
+};
+
 class GodotCircleShape2D : public GodotShape2D {
 	real_t radius;
 
