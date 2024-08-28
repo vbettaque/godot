@@ -248,7 +248,7 @@ Variant GodotSegmentShape2D::get_data() const {
 /*********************************************************/
 /*********************************************************/
 
-void GodotLineShape2D::get_supports(const Vector2 &p_normal, Vector2 *r_supports, int &r_amount) const {
+void GodotPolylineShape2D::get_supports(const Vector2 &p_normal, Vector2 *r_supports, int &r_amount) const {
 	if (Math::abs(p_normal.dot(n)) > segment_is_valid_support_threshold) {
 		r_supports[0] = a;
 		r_supports[1] = b;
@@ -265,11 +265,11 @@ void GodotLineShape2D::get_supports(const Vector2 &p_normal, Vector2 *r_supports
 	r_amount = 1;
 }
 
-bool GodotLineShape2D::contains_point(const Vector2 &p_point) const {
+bool GodotPolylineShape2D::contains_point(const Vector2 &p_point) const {
 	return false;
 }
 
-bool GodotLineShape2D::intersect_segment(const Vector2 &p_begin, const Vector2 &p_end, Vector2 &r_point, Vector2 &r_normal) const {
+bool GodotPolylineShape2D::intersect_segment(const Vector2 &p_begin, const Vector2 &p_end, Vector2 &r_point, Vector2 &r_normal) const {
 	if (!Geometry2D::segment_intersects_segment(p_begin, p_end, a, b, &r_point)) {
 		return false;
 	}
@@ -283,11 +283,11 @@ bool GodotLineShape2D::intersect_segment(const Vector2 &p_begin, const Vector2 &
 	return true;
 }
 
-real_t GodotLineShape2D::get_moment_of_inertia(real_t p_mass, const Size2 &p_scale) const {
+real_t GodotPolylineShape2D::get_moment_of_inertia(real_t p_mass, const Size2 &p_scale) const {
 	return p_mass * ((a * p_scale).distance_squared_to(b * p_scale)) / 12;
 }
 
-void GodotLineShape2D::set_data(const Variant &p_data) {
+void GodotPolylineShape2D::set_data(const Variant &p_data) {
 	ERR_FAIL_COND(p_data.get_type() != Variant::RECT2);
 
 	Rect2 r = p_data;
@@ -307,7 +307,7 @@ void GodotLineShape2D::set_data(const Variant &p_data) {
 	configure(aabb_new);
 }
 
-Variant GodotLineShape2D::get_data() const {
+Variant GodotPolylineShape2D::get_data() const {
 	Rect2 r;
 	r.position = a;
 	r.size = b;

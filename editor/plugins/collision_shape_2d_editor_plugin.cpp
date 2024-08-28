@@ -39,7 +39,7 @@
 #include "scene/resources/2d/circle_shape_2d.h"
 #include "scene/resources/2d/concave_polygon_shape_2d.h"
 #include "scene/resources/2d/convex_polygon_shape_2d.h"
-#include "scene/resources/2d/line_shape_2d.h"
+#include "scene/resources/2d/polyline_shape_2d.h"
 #include "scene/resources/2d/rectangle_shape_2d.h"
 #include "scene/resources/2d/segment_shape_2d.h"
 #include "scene/resources/2d/separation_ray_shape_2d.h"
@@ -118,8 +118,8 @@ Variant CollisionShape2DEditor::get_handle_value(int idx) const {
 
 		} break;
 
-		case LINE_SHAPE: {
-			Ref<LineShape2D> line = node->get_shape();
+		case POLYLINE_SHAPE: {
+			Ref<PolylineShape2D> line = node->get_shape();
 
 			if (idx == 0) {
 				return line->get_a();
@@ -217,9 +217,9 @@ void CollisionShape2DEditor::set_handle(int idx, Point2 &p_point) {
 			}
 		} break;
 
-		case LINE_SHAPE: {
+		case POLYLINE_SHAPE: {
 			if (edit_handle < 2) {
-				Ref<LineShape2D> line = node->get_shape();
+				Ref<PolylineShape2D> line = node->get_shape();
 
 				if (idx == 0) {
 					line->set_a(p_point);
@@ -310,8 +310,8 @@ void CollisionShape2DEditor::commit_handle(int idx, Variant &p_org) {
 
 		} break;
 
-		case LINE_SHAPE: {
-			Ref<LineShape2D> line = node->get_shape();
+		case POLYLINE_SHAPE: {
+			Ref<PolylineShape2D> line = node->get_shape();
 			if (idx == 0) {
 				undo_redo->add_do_method(line.ptr(), "set_a", line->get_a());
 				undo_redo->add_undo_method(line.ptr(), "set_a", p_org);
@@ -447,8 +447,8 @@ void CollisionShape2DEditor::_shape_changed() {
 		shape_type = CONCAVE_POLYGON_SHAPE;
 	} else if (Object::cast_to<ConvexPolygonShape2D>(*current_shape)) {
 		shape_type = CONVEX_POLYGON_SHAPE;
-	} else if (Object::cast_to<LineShape2D>(*current_shape)) {
-		shape_type = LINE_SHAPE;
+	} else if (Object::cast_to<PolylineShape2D>(*current_shape)) {
+		shape_type = POLYLINE_SHAPE;
 	} else if (Object::cast_to<WorldBoundaryShape2D>(*current_shape)) {
 		shape_type = WORLD_BOUNDARY_SHAPE;
 	} else if (Object::cast_to<SeparationRayShape2D>(*current_shape)) {
@@ -558,8 +558,8 @@ void CollisionShape2DEditor::forward_canvas_draw_over_viewport(Control *p_overla
 
 		} break;
 
-		case LINE_SHAPE: {
-			Ref<LineShape2D> shape = current_shape;
+		case POLYLINE_SHAPE: {
+			Ref<PolylineShape2D> shape = current_shape;
 
 			handles.resize(2);
 			handles.write[0] = shape->get_a();

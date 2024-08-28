@@ -132,7 +132,7 @@ void PhysicsServer2DExtension::_bind_methods() {
 	GDVIRTUAL_BIND(_world_boundary_shape_create);
 	GDVIRTUAL_BIND(_separation_ray_shape_create);
 	GDVIRTUAL_BIND(_segment_shape_create);
-	GDVIRTUAL_BIND(_line_shape_create);
+	GDVIRTUAL_BIND(_polyline_shape_create);
 	GDVIRTUAL_BIND(_circle_shape_create);
 	GDVIRTUAL_BIND(_rectangle_shape_create);
 	GDVIRTUAL_BIND(_capsule_shape_create);

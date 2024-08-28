@@ -1,5 +1,5 @@
 /**************************************************************************/
-/*  line_shape_2d.h                                                    */
+/*  polyline_shape_2d.h                                                    */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
@@ -28,13 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef LINE_SHAPE_2D_H
-#define LINE_SHAPE_2D_H
+#ifndef POLYLINE_SHAPE_2D_H
+#define POLYLINE_SHAPE_2D_H
 
 #include "scene/resources/2d/shape_2d.h"
 
-class LineShape2D : public Shape2D {
-	GDCLASS(LineShape2D, Shape2D);
+class PolylineShape2D : public Shape2D {
+	GDCLASS(PolylineShape2D, Shape2D);
 
 	Vector2 a;
 	Vector2 b;
@@ -57,7 +57,7 @@ public:
 	virtual Rect2 get_rect() const override;
 	virtual real_t get_enclosing_radius() const override;
 
-	LineShape2D();
+	PolylineShape2D();
 };
 
-#endif // LINE_SHAPE_2D_H
+#endif // POLYLINE_SHAPE_2D_H

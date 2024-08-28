@@ -53,8 +53,8 @@ RID GodotPhysicsServer2D::_shape_create(ShapeType p_shape) {
 		case SHAPE_SEGMENT: {
 			shape = memnew(GodotSegmentShape2D);
 		} break;
-		case SHAPE_LINE: {
-			shape = memnew(GodotLineShape2D);
+		case SHAPE_POLYLINE: {
+			shape = memnew(GodotPolylineShape2D);
 		} break;
 		case SHAPE_CIRCLE: {
 			shape = memnew(GodotCircleShape2D);
@@ -95,8 +95,8 @@ RID GodotPhysicsServer2D::segment_shape_create() {
 	return _shape_create(SHAPE_SEGMENT);
 }
 
-RID GodotPhysicsServer2D::line_shape_create() {
-	return _shape_create(SHAPE_LINE);
+RID GodotPhysicsServer2D::polyline_shape_create() {
+	return _shape_create(SHAPE_POLYLINE);
 }
 
 RID GodotPhysicsServer2D::circle_shape_create() {

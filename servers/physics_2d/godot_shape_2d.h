@@ -262,7 +262,7 @@ public:
 	}
 };
 
-class GodotLineShape2D : public GodotShape2D {
+class GodotPolylineShape2D : public GodotShape2D {
 	Vector2 a;
 	Vector2 b;
 	Vector2 n;
@@ -272,7 +272,7 @@ public:
 	_FORCE_INLINE_ const Vector2 &get_b() const { return b; }
 	_FORCE_INLINE_ const Vector2 &get_normal() const { return n; }
 
-	virtual PhysicsServer2D::ShapeType get_type() const override { return PhysicsServer2D::SHAPE_LINE; }
+	virtual PhysicsServer2D::ShapeType get_type() const override { return PhysicsServer2D::SHAPE_POLYLINE; }
 
 	_FORCE_INLINE_ Vector2 get_xformed_normal(const Transform2D &p_xform) const {
 		return (p_xform.xform(b) - p_xform.xform(a)).normalized().orthogonal();
@@ -298,8 +298,8 @@ public:
 
 	DEFAULT_PROJECT_RANGE_CAST
 
-	_FORCE_INLINE_ GodotLineShape2D() {}
-	_FORCE_INLINE_ GodotLineShape2D(const Vector2 &p_a, const Vector2 &p_b, const Vector2 &p_n) {
+	_FORCE_INLINE_ GodotPolylineShape2D() {}
+	_FORCE_INLINE_ GodotPolylineShape2D(const Vector2 &p_a, const Vector2 &p_b, const Vector2 &p_n) {
 		a = p_a;
 		b = p_b;
 		n = p_n;

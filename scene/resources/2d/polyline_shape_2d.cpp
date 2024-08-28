@@ -1,5 +1,5 @@
 /**************************************************************************/
-/*  line_shape_2d.cpp                                                  */
+/*  polyline_shape_2d.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
@@ -28,19 +28,19 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "line_shape_2d.h"
+#include "polyline_shape_2d.h"
 
 #include "core/math/geometry_2d.h"
 #include "servers/physics_server_2d.h"
 #include "servers/rendering_server.h"
 
-bool LineShape2D::_edit_is_selected_on_click(const Point2 &p_point, double p_tolerance) const {
+bool PolylineShape2D::_edit_is_selected_on_click(const Point2 &p_point, double p_tolerance) const {
 	Vector2 l[2] = { a, b };
 	Vector2 closest = Geometry2D::get_closest_point_to_segment(p_point, l);
 	return p_point.distance_to(closest) < p_tolerance;
 }
 
-void LineShape2D::_update_shape() {
+void PolylineShape2D::_update_shape() {
 	Rect2 r;
 	r.position = a;
 	r.size = b;
@@ -48,52 +48,52 @@ void LineShape2D::_update_shape() {
 	emit_changed();
 }
 
-void LineShape2D::set_a(const Vector2 &p_a) {
+void PolylineShape2D::set_a(const Vector2 &p_a) {
 	a = p_a;
 	_update_shape();
 }
 
-Vector2 LineShape2D::get_a() const {
+Vector2 PolylineShape2D::get_a() const {
 	return a;
 }
 
-void LineShape2D::set_b(const Vector2 &p_b) {
+void PolylineShape2D::set_b(const Vector2 &p_b) {
 	b = p_b;
 	_update_shape();
 }
 
-Vector2 LineShape2D::get_b() const {
+Vector2 PolylineShape2D::get_b() const {
 	return b;
 }
 
-void LineShape2D::draw(const RID &p_to_rid, const Color &p_color) {
+void PolylineShape2D::draw(const RID &p_to_rid, const Color &p_color) {
 	RenderingServer::get_singleton()->canvas_item_add_line(p_to_rid, a, b, p_color, 3);
 }
 
-Rect2 LineShape2D::get_rect() const {
+Rect2 PolylineShape2D::get_rect() const {
 	Rect2 rect;
 	rect.position = a;
 	rect.expand_to(b);
 	return rect;
 }
 
-real_t LineShape2D::get_enclosing_radius() const {
+real_t PolylineShape2D::get_enclosing_radius() const {
 	return (a + b).length();
 }
 
-void LineShape2D::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("set_a", "a"), &LineShape2D::set_a);
-	ClassDB::bind_method(D_METHOD("get_a"), &LineShape2D::get_a);
+void PolylineShape2D::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("set_a", "a"), &PolylineShape2D::set_a);
+	ClassDB::bind_method(D_METHOD("get_a"), &PolylineShape2D::get_a);
 
-	ClassDB::bind_method(D_METHOD("set_b", "b"), &LineShape2D::set_b);
-	ClassDB::bind_method(D_METHOD("get_b"), &LineShape2D::get_b);
+	ClassDB::bind_method(D_METHOD("set_b", "b"), &PolylineShape2D::set_b);
+	ClassDB::bind_method(D_METHOD("get_b"), &PolylineShape2D::get_b);
 
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "a", PROPERTY_HINT_NONE, "suffix:px"), "set_a", "get_a");
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2, "b", PROPERTY_HINT_NONE, "suffix:px"), "set_b", "get_b");
 }
 
-LineShape2D::LineShape2D() :
-		Shape2D(PhysicsServer2D::get_singleton()->line_shape_create()) {
+PolylineShape2D::PolylineShape2D() :
+		Shape2D(PhysicsServer2D::get_singleton()->polyline_shape_create()) {
 	a = Vector2();
 	b = Vector2(0, 10);
 	_update_shape();

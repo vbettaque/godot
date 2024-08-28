@@ -203,7 +203,7 @@ public:
 	EXBIND0R(RID, world_boundary_shape_create)
 	EXBIND0R(RID, separation_ray_shape_create)
 	EXBIND0R(RID, segment_shape_create)
-	EXBIND0R(RID, line_shape_create)
+	EXBIND0R(RID, polyline_shape_create)
 	EXBIND0R(RID, circle_shape_create)
 	EXBIND0R(RID, rectangle_shape_create)
 	EXBIND0R(RID, capsule_shape_create)

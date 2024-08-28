@@ -209,10 +209,10 @@
 #include "scene/resources/2d/circle_shape_2d.h"
 #include "scene/resources/2d/concave_polygon_shape_2d.h"
 #include "scene/resources/2d/convex_polygon_shape_2d.h"
-#include "scene/resources/2d/line_shape_2d.h"
 #include "scene/resources/2d/navigation_mesh_source_geometry_data_2d.h"
 #include "scene/resources/2d/navigation_polygon.h"
 #include "scene/resources/2d/polygon_path_finder.h"
+#include "scene/resources/2d/polyline_shape_2d.h"
 #include "scene/resources/2d/rectangle_shape_2d.h"
 #include "scene/resources/2d/segment_shape_2d.h"
 #include "scene/resources/2d/separation_ray_shape_2d.h"
@@ -996,7 +996,7 @@ void register_scene_types() {
 	GDREGISTER_ABSTRACT_CLASS(Shape2D);
 	GDREGISTER_CLASS(WorldBoundaryShape2D);
 	GDREGISTER_CLASS(SegmentShape2D);
-	GDREGISTER_CLASS(LineShape2D);
+	GDREGISTER_CLASS(PolylineShape2D);
 	GDREGISTER_CLASS(SeparationRayShape2D);
 	GDREGISTER_CLASS(CircleShape2D);
 	GDREGISTER_CLASS(RectangleShape2D);
